@@ -64,19 +64,12 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-
   padding: 40px;
-
   border-radius: 28px;
-
   background: rgba(255, 255, 255, 0.08);
-
   border: 1px solid rgba(255, 255, 255, 0.15);
-
   backdrop-filter: blur(20px);
-
   -webkit-backdrop-filter: blur(20px);
-
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
 }
 
@@ -107,25 +100,17 @@ label {
 
 input[type="text"] {
   width: 100%;
-
   padding: 15px;
-
   border-radius: 14px;
-
   border: 1px solid rgba(255, 255, 255, 0.12);
-
   background: rgba(255, 255, 255, 0.06);
-
   color: white;
-
   outline: none;
-
   transition: 0.3s;
 }
 
 input[type="text"]:focus {
   border-color: #60a5fa;
-
   box-shadow: 0 0 20px rgba(96, 165, 250, 0.35);
 }
 
@@ -137,17 +122,11 @@ input[type="range"] {
 
 input[type="color"] {
   width: 100%;
-
   height: 50px;
-
   border: none;
-
   border-radius: 14px;
-
   cursor: pointer;
-
   background: transparent;
-
   padding: 4px;
 }
 
@@ -194,32 +173,21 @@ button:hover {
 .placeholder {
   width: 100%;
   max-width: 380px;
-
   padding: 30px;
-
   text-align: center;
-
   border-radius: 24px;
-
   background: rgba(255, 255, 255, 0.07);
-
   border: 1px solid rgba(255, 255, 255, 0.12);
-
   backdrop-filter: blur(18px);
 }
 
 .preview img {
   width: 100%;
   max-width: 260px;
-
   border-radius: 16px;
-
   background: #fff;
-
   padding: 15px;
-
   margin-bottom: 20px;
-
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
 }
 
@@ -236,49 +204,18 @@ button:hover {
 
 .preview a {
   display: inline-block;
-
   padding: 14px 28px;
-
   border-radius: 14px;
-
   text-decoration: none;
-
   color: white;
-
   font-weight: 600;
-
   background: linear-gradient(135deg, #10b981, #06b6d4);
-
   transition: 0.3s;
 }
 
 .preview a:hover {
   transform: translateY(-3px);
-
   box-shadow: 0 15px 30px rgba(16, 185, 129, 0.35);
-}
-
-/* ---------- Responsive ---------- */
-
-@media (max-width: 900px) {
-  .glass {
-    grid-template-columns: 1fr;
-
-    padding: 25px;
-  }
-
-  .left h1 {
-    font-size: 34px;
-  }
-
-  .right {
-    margin-top: 20px;
-  }
-
-  .preview,
-  .placeholder {
-    max-width: 100%;
-  }
 }
 
 /* ---------- Animation ---------- */
@@ -298,5 +235,176 @@ button:hover {
     opacity: 1;
 
     transform: translateY(0);
+  }
+}
+
+/* Device Responsive */
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.container {
+  padding: 20px;
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  body {
+    padding: 20px;
+    align-items: flex-start;
+  }
+
+  .glass {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 30px;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+  }
+
+  .left h1 {
+    font-size: 34px;
+    text-align: center;
+  }
+
+  .left p {
+    text-align: center;
+  }
+
+  .preview,
+  .placeholder {
+    max-width: 100%;
+  }
+
+  .preview img {
+    max-width: 240px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0;
+  }
+
+  .glass {
+    border-radius: 20px;
+
+    padding: 20px;
+
+    gap: 25px;
+  }
+
+  .left h1 {
+    font-size: 28px;
+  }
+
+  .left p {
+    font-size: 14px;
+  }
+
+  label {
+    font-size: 13px;
+  }
+
+  input[type="text"] {
+    padding: 14px;
+
+    font-size: 15px;
+  }
+
+  input[type="range"] {
+    margin-top: 5px;
+  }
+
+  input[type="color"] {
+    height: 45px;
+  }
+
+  button {
+    width: 100%;
+
+    padding: 15px;
+
+    font-size: 16px;
+  }
+
+  .preview,
+  .placeholder {
+    padding: 20px;
+  }
+
+  .preview img {
+    width: 200px;
+    max-width: 100%;
+  }
+
+  .preview a {
+    width: 100%;
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+  }
+}
+
+/* Small Mobile */
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .glass {
+    padding: 15px;
+
+    border-radius: 18px;
+  }
+
+  .left h1 {
+    font-size: 24px;
+  }
+
+  .left p {
+    font-size: 13px;
+  }
+
+  input[type="text"] {
+    font-size: 14px;
+
+    padding: 12px;
+  }
+
+  button {
+    font-size: 15px;
+
+    padding: 14px;
+  }
+
+  .preview img {
+    width: 170px;
+  }
+
+  .placeholder h2 {
+    font-size: 22px;
+  }
+}
+
+/* Large Desktop */
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1300px;
   }
 }
