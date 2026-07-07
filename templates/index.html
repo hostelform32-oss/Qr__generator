@@ -5,86 +5,170 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>QR Code Generator</title>
+
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
   </head>
 
   <body>
+    <!-- Background -->
     <div class="background"></div>
 
-    <div class="container">
+    <!-- Toast -->
+    <div id="toast" class="toast">✅ QR Generated Successfully!</div>
+
+    <!-- Loader -->
+    <div id="loader" class="loader-container">
+      <div class="loader"></div>
+      <p>Generating QR...</p>
+    </div>
+
+    <main class="container">
       <div class="glass">
-        <div class="left">
-          <h1>QR Code Generator</h1>
+        <!-- Left Panel -->
+
+        <section class="left">
+          <div class="header">
+            <h1>QR Generator</h1>
+
+            <button id="themeBtn" class="theme-btn" type="button">🌙</button>
+          </div>
 
           <p>Create Beautiful QR Codes Instantly</p>
 
-          <form method="POST">
-            <label>Enter URL / Text</label>
+          {% if error %}
+          <div class="error-box">{{ error }}</div>
+          {% endif %}
 
-            <input
-              type="text"
-              name="data"
-              placeholder="https://example.com"
-              required
-            />
+          <form id="qrForm" method="POST">
+            <div class="form-group">
+              <label for="type">Select Type</label>
 
-            <label>QR Size</label>
+              <select id="type" name="type">
+                <option value="url">🌐 URL</option>
 
-            <input
-              type="range"
-              min="4"
-              max="20"
-              value="10"
-              name="size"
-              id="size"
-            />
+                <option value="text">📝 Text</option>
 
-            <span id="sizeValue">10</span>
+                <option value="email">📧 Email</option>
 
-            <label>Foreground Color</label>
+                <option value="phone">📞 Phone</option>
 
-            <input type="color" name="fill" value="#000000" />
+                <option value="wifi">📶 Wi-Fi</option>
+              </select>
+            </div>
 
-            <label>Background Color</label>
+            <div id="wifiFields" style="display: none">
+              <label>Wi-Fi Name (SSID)</label>
+              <input type="text" id="ssid" />
 
-            <input type="color" name="back" value="#ffffff" />
+              <label>Password</label>
+              <input type="password" id="wifiPassword" />
 
-            <button type="submit">Generate QR</button>
+              <label>Security</label>
+              <select id="security">
+                <option>WPA</option>
+                <option>WPA2</option>
+                <option>WEP</option>
+                <option>nopass</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="dataInput">Enter Data</label>
+
+              <input
+                id="dataInput"
+                type="text"
+                name="data"
+                placeholder="Enter here..."
+                required
+              />
+            </div>
+
+            <button id="copyBtn" type="button">
+              <i class="fa-solid fa-copy"></i>
+              Copy Input
+            </button>
+
+            <div class="form-group">
+              <label for="size">QR Size</label>
+
+              <input
+                id="size"
+                type="range"
+                min="4"
+                max="20"
+                value="10"
+                name="size"
+              />
+
+              <span id="sizeValue">10</span>
+            </div>
+
+            <div class="form-group">
+              <label>Foreground Color</label>
+
+              <input type="color" name="fill" value="#000000" />
+            </div>
+
+            <div class="form-group">
+              <label>Background Color</label>
+
+              <input type="color" name="back" value="#ffffff" />
+            </div>
+
+            <button class="generate-btn" type="submit">
+              <i class="fa-solid fa-qrcode"></i>
+              Generate QR
+            </button>
           </form>
-        </div>
+        </section>
 
-        <div class="right">
+        <!-- Right Panel -->
+
+        <section class="right">
           {% if qr %}
 
           <div class="preview">
-            <img src="{{ qr }}" alt="QR Code" />
+            <img src="{{ qr }}" alt="Generated QR Code" />
 
-            <a href="/download"> Download PNG </a>
+            <div class="download-buttons">
+              <a href="/download" class="download-btn">
+                <i class="fa-solid fa-download"></i>
+                PNG
+              </a>
+
+              <a href="/download_svg" class="svg-btn">
+                <i class="fa-solid fa-file"></i>
+                SVG
+              </a>
+            </div>
           </div>
 
           {% else %}
 
           <div class="placeholder">
-            <h2>Your QR Code</h2>
+            <h2>QR Preview</h2>
 
-            <p>QR Preview will appear here</p>
+            <p>Your QR Code will appear here.</p>
           </div>
 
           {% endif %}
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
